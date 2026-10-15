@@ -22,8 +22,9 @@ public class AB_Idle : StateMachineBehaviour
         }
     }
 
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        animator.SetBool("IsPatrolling", false);
-    }
+    //Como los triggers de iunaiti en el animator son una mierda, se pueden usar booleanos para más fiabilidad
+    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    animator.SetBool("IsPatrolling", false);
+    //}
 }
