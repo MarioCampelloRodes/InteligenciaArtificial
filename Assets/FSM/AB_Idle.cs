@@ -20,11 +20,17 @@ public class AB_Idle : StateMachineBehaviour
         {
             animator.SetBool("IsPatrolling", true);
         }
+
+        //Si detecta algún objeto peligroso en algún momento, pasa al estado de huir
+        if(npc.DetectDanger() != null)
+        {
+            animator.SetBool("IsRunningAway", true);
+        }
     }
 
     //Como los triggers de iunaiti en el animator son una mierda, se pueden usar booleanos para más fiabilidad
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    animator.SetBool("IsPatrolling", false);
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        animator.SetBool("IsIdle", false);
+    }
 }

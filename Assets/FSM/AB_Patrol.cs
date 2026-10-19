@@ -40,15 +40,16 @@ public class AB_Patrol : StateMachineBehaviour
         else
         {
             //Pasar al estado Idle
-            animator.SetBool("IsPatrolling", false);
+            animator.SetBool("IsIdle", false);
         }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        //Cuando salga del estado, por la razón que sea, cambia el parámetro bool del estado a false (para que no se quede pillado por estar todo en true)
+        animator.SetBool("IsPatrolling", false);
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
