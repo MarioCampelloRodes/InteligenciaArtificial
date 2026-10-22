@@ -26,6 +26,12 @@ public class AB_Patrol : StateMachineBehaviour
         {
             ChooseAction(animator);
         }
+
+        //Si detecta algún objeto peligroso en algún momento, pasa al estado de huir
+        if (npc.DetectDanger() != null)
+        {
+            animator.SetBool("IsRunningAway", true);
+        }
     }
 
     void ChooseAction(Animator animator)

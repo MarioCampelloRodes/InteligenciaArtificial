@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 261420941}
   m_Layer: 3
   m_Name: FakePlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -770,6 +770,8 @@ MonoBehaviour:
   dangerLayers:
     serializedVersion: 2
     m_Bits: 8
+  runAwayDistante: 6
+  runAwayAngle: 90
 --- !u!195 &1478925521
 NavMeshAgent:
   m_ObjectHideFlags: 0

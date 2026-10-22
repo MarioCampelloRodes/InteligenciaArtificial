@@ -17,6 +17,11 @@ public class AnimalNPC : MonoBehaviour
     public float detectRange = 4;
     public LayerMask dangerLayers;
 
+    public float runAwayDistante = 6f;
+
+    //Ángulo con el que modificará su dirección de huida
+    [Range(0, 110)] public float runAwayAngle = 90f; 
+
     void Start()
     {
         
