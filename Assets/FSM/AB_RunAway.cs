@@ -62,6 +62,11 @@ public class AB_RunAway : StateMachineBehaviour
 
     Vector3 GetRunawayPosition(Animator anim)
     {
+        if(npc.DetectDanger() == null)
+        {
+            return npc.GetRandomPosition();
+        }
+
         //Calcula la dirección contraria a la que se encuentra el peligro
         Vector3 direction = anim.transform.position - npc.DetectDanger().position;
 
