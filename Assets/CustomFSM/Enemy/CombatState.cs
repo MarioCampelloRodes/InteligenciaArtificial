@@ -1,0 +1,8 @@
+using UnityEngine;
+using UnityEngine.AI;
+
+[System.Serializable]
+public class CombatState : State
+{
+    public NavMeshAgent agent;
+}

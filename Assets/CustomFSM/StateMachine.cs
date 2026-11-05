@@ -22,6 +22,7 @@ public class StateMachine
     // Update is called once per frame
     public void Update()
     {
+        Debug.Log($"Current state: {currentState.name}");
         currentState.OnUpdate();
     }
 }
