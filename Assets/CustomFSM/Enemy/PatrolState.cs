@@ -4,13 +4,20 @@ using UnityEngine.AI;
 [System.Serializable]
 public class PatrolState : State
 {
+    [Header("MOVEMENT")]
     public NavMeshAgent agent;
-    public Transform[] waypoints;
     public Vector2 idleTimeInterval = new Vector2(1, 2);
+    public Transform[] waypoints;
     private float idleTimer;
 
     //Índice del punto de ruta actual
     private int waypointIndex;
+
+    [Header("DETECTION")]
+
+    public float detectionRange = 8;
+
+    public LayerMask detectionLayers;
 
     public override void OnEnter()
     {
@@ -39,6 +46,20 @@ public class PatrolState : State
                 }
                 agent.SetDestination(waypoints[waypointIndex].position);
             }
+
+        }
+        
+        DetectTargets();
+    }
+
+    void DetectTargets()
+    {
+        //Detecta a su alrededor con un Overlap. Si detecta al jugador, cambia de estado
+        Collider[] targets = Physics.OverlapSphere(agent.transform.position, detectionRange, detectionLayers);
+
+        if(targets.Length > 0)
+        {
+            stateMachine.ChangeState(stateToChange);
         }
     }
 }

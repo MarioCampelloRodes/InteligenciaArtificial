@@ -16,11 +16,22 @@ public class EnemyShooter : MonoBehaviour
 
         //Empezar en un estado
         stateMachine.ChangeState(patrol);
+
+        //Asignar el estado a cambiar cuando se cumplan ciertas condiciones
+        patrol.Setup(stateMachine, combat);
     }
 
     // Update is called once per frame
     void Update()
     {
         stateMachine.Update();    
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.mediumVioletRed;
+        Gizmos.DrawWireSphere(transform.position, combat.attackRange);
+        Gizmos.color = Color.navajoWhite;
+        Gizmos.DrawWireSphere(transform.position, patrol.detectionRange);
     }
 }
