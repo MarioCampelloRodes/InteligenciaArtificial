@@ -5,6 +5,7 @@ public class EnemyShooter : MonoBehaviour
     [Header ("STATES")]
     [SerializeField] private PatrolState patrol;
     [SerializeField] private CombatState combat;
+    [SerializeField] private AlertState alert;
 
     private StateMachine stateMachine;
 
@@ -17,8 +18,9 @@ public class EnemyShooter : MonoBehaviour
         //Empezar en un estado
         stateMachine.ChangeState(patrol);
 
-        //Asignar el estado a cambiar cuando se cumplan ciertas condiciones
-        patrol.Setup(stateMachine, combat);
+        //Asignar los estados a cambiar cuando se cumplan ciertas condiciones
+        patrol.Setup(stateMachine, alert);
+        alert.Setup(stateMachine, combat);
     }
 
     // Update is called once per frame
@@ -33,5 +35,7 @@ public class EnemyShooter : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, combat.attackRange);
         Gizmos.color = Color.navajoWhite;
         Gizmos.DrawWireSphere(transform.position, patrol.detectionRange);
+        Gizmos.color = Color.dodgerBlue;
+        Gizmos.DrawWireSphere(transform.position, alert.hearingRange);
     }
 }

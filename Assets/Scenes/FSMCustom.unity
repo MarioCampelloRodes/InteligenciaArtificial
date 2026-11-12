@@ -281,7 +281,7 @@ MonoBehaviour:
     - {fileID: 1680982885}
     - {fileID: 610685128}
     - {fileID: 1692673558}
-    detectionRange: 8
+    detectionRange: 10
     detectionLayers:
       serializedVersion: 2
       m_Bits: 8
@@ -292,6 +292,14 @@ MonoBehaviour:
     attackRange: 6
     timeToAttack: 0.5
     rotationSpeed: 5
+  alert:
+    name: ALERT
+    hearingRange: 8
+    visionAngle: 90
+    detectionLayers:
+      serializedVersion: 2
+      m_Bits: 8
+    agent: {fileID: 25471566}
 --- !u!1 &490046929
 GameObject:
   m_ObjectHideFlags: 0
