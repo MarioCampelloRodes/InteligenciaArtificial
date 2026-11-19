@@ -1,28 +1,64 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StateMachine
 {
     public State currentState;
 
+    private List<StateTransition> transitions = new();
+
+    private TransitionType currentTransition;
+
     public void ChangeState(State newState)
     {
-        //Ejecutar funci髇 de salir del estado del estado actual
+        //Salir del estado en el que se encuentre
         if(currentState != null)
         {
             currentState.OnExit();
         }
-
         //Asignar el nuevo estado
         currentState = newState;
-
         //Llamar al OnEnter del nuevo estado actual
         currentState.OnEnter();
     }
-    
-    // Update is called once per frame
+
     public void Update()
     {
         Debug.Log($"Current state: {currentState.name}");
-        currentState.OnUpdate();
+
+        //comprueba las transiciones una a una
+        currentTransition = currentState.OnUpdate();
+
+        //si la transici贸n no se cumple, no la intenta comprobar
+        if (currentTransition == TransitionType.None)
+        {
+            return;
+        }
+
+        //comprueba si hay alguna transici贸n que se haya cumplido
+        TryTransition(currentTransition);
+    }
+
+    public void DrawGizmos()
+    {
+        currentState?.DrawGizmos();
+    }
+
+    //A帽ade una nueva transici贸n indicando el estado del que parte, el estado al que va y el tipo de transici贸n
+    public void AddTransition(State from, State to, TransitionType type)
+    {
+        transitions.Add(new StateTransition(from, type, to));
+    }
+
+    private void TryTransition(TransitionType type)
+    {
+        foreach (StateTransition transition in transitions)
+        {
+            if (transition.From == currentState && transition.Type == type)
+            {
+                ChangeState(transition.To);
+                return;
+            }
+        }
     }
 }

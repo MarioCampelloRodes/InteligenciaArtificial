@@ -300,6 +300,16 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 8
     agent: {fileID: 25471566}
+  findCover:
+    name: FindCover
+    searchRange: 20
+    coverLayers:
+      serializedVersion: 2
+      m_Bits: 64
+    speedModifier: 3
+    agent: {fileID: 25471566}
+    minimumDotProduct: -0.5
+    normalDisplacement: 2
 --- !u!1 &490046929
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,7 +511,7 @@ GameObject:
   - component: {fileID: 651998643}
   - component: {fileID: 651998642}
   - component: {fileID: 651998641}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -709,7 +719,7 @@ Transform:
   m_GameObject: {fileID: 745070560}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.93, y: 1, z: 9.76}
+  m_LocalPosition: {x: 4.22, y: 1, z: -10.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -939,7 +949,7 @@ GameObject:
   - component: {fileID: 1526908951}
   - component: {fileID: 1526908950}
   - component: {fileID: 1526908949}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

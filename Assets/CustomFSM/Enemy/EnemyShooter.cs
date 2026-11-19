@@ -6,6 +6,7 @@ public class EnemyShooter : MonoBehaviour
     [SerializeField] private PatrolState patrol;
     [SerializeField] private CombatState combat;
     [SerializeField] private AlertState alert;
+    [SerializeField] private FindCoverState findCover;
 
     private StateMachine stateMachine;
 
@@ -18,9 +19,14 @@ public class EnemyShooter : MonoBehaviour
         //Empezar en un estado
         stateMachine.ChangeState(patrol);
 
-        //Asignar los estados a cambiar cuando se cumplan ciertas condiciones
-        patrol.Setup(stateMachine, alert);
-        alert.Setup(stateMachine, combat);
+        //Configurar las transiciones entre estados
+        //PATROL --> ALERT
+        stateMachine.AddTransition(patrol, alert, TransitionType.PlayerDetected);
+        //ALERT --> COMBAT
+        stateMachine.AddTransition(alert, combat, TransitionType.PlayerDetected);
+        //ALERT --> PATROL
+        stateMachine.AddTransition(alert, patrol, TransitionType.PlayerLost);
+
     }
 
     // Update is called once per frame

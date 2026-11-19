@@ -22,16 +22,7 @@ public class AlertState : State
         agent.SetDestination(player.position);
     }
 
-    public override void OnUpdate()
-    {
-        DetectPlayer();
-    }
-    public override void OnExit()
-    {
-
-    }
-
-    void DetectPlayer()
+    public override TransitionType OnUpdate()
     {
         //Calcula la dirección hacia el objeto detectado (player)
         Vector3 dirToTarget = player.position - agent.transform.position;
@@ -45,7 +36,19 @@ public class AlertState : State
         //Comprobar si el jugador está en su rango de visión
         if (dotProduct > Mathf.Cos(visionAngle * 0.5f * Mathf.Deg2Rad))
         {
-            stateMachine.ChangeState(stateToChange);
+            return TransitionType.PlayerDetected;
         }
+        
+        //Si llega a la posición donde vio al objetivo pero no lo detecta
+        if(agent.remainingDistance < agent.stoppingDistance + 0.1f)
+        {
+            return TransitionType.PlayerLost;
+        }
+
+        return TransitionType.None;
+    }
+    public override void OnExit()
+    {
+
     }
 }

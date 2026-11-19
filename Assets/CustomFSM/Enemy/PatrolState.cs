@@ -28,7 +28,7 @@ public class PatrolState : State
         agent.SetDestination(waypoints[waypointIndex].position);
     }
 
-    public override void OnUpdate()
+    public override TransitionType OnUpdate()
     {
         Vector3 direction = waypoints[waypointIndex].position - agent.transform.position;
         direction.y = 0;
@@ -46,20 +46,16 @@ public class PatrolState : State
                 }
                 agent.SetDestination(waypoints[waypointIndex].position);
             }
-
         }
-        
-        DetectTargets();
-    }
 
-    void DetectTargets()
-    {
         //Detecta a su alrededor con un Overlap. Si detecta al jugador, cambia de estado
         Collider[] targets = Physics.OverlapSphere(agent.transform.position, detectionRange, detectionLayers);
 
-        if(targets.Length > 0)
+        if (targets.Length > 0)
         {
-            stateMachine.ChangeState(stateToChange);
+            return TransitionType.PlayerDetected;
         }
+
+        return TransitionType.None;
     }
 }

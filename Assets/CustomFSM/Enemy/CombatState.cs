@@ -24,7 +24,7 @@ public class CombatState : State
         }
     }
 
-    public override void OnUpdate()
+    public override TransitionType OnUpdate()
     {
         agent.SetDestination(target.position);
         Vector3 targetDir = target.position - agent.transform.position;
@@ -37,6 +37,8 @@ public class CombatState : State
 
         //Mirar hacia el objetivo
         LookAtPlayer(targetDir);
+
+        return TransitionType.None;
     }
 
     public override void OnExit()
